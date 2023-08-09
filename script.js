@@ -1,40 +1,38 @@
 const nextElement = document.querySelector(".next");
+
 const prevElement = document.querySelector(".prev");
 
-const imgsElement = document.querySelectorAll("img");
+const imagesElement = document.querySelectorAll("img");
 
-// console.log(imgsElement) // NodeList(3) [img, img, img]
+const imageContainerEl = document.querySelector(".image-container");
 
-const imageContainerElement = document.querySelector(".image-container");
+let currentImage = 1;
 
-let currentImg = 1;
 let timeout;
 
 nextElement.addEventListener("click", () => {
-    // console.log("Clicked Next");  // Clicked Next
-    currentImg++;
-    clearTimeout(timeout);
-    updateImg();
-})
+  currentImage++;
+  clearTimeout(timeout);
+  updateImage();
+});
 
 prevElement.addEventListener("click", () => {
-    // console.log("Clicked Previous"); // Clicked Previous
-    currentImg--;
-    clearTimeout(timeout);
-    updateImg();
-})
+  currentImage--;
+  clearTimeout(timeout);
+  updateImage();
+});
 
-updateImg();
+updateImage();
 
-function updateImg() {
-    if(currentImg > imgsElement.length) {
-        currentImg = 1;
-    } else if(currentImg < 1) {
-        currentImg = imgsElement.length;
-    }
-    imageContainerElement.style.transform =  `translateX(-${(currentImg - 1 )* 500}px)`;
-    timeout = setTimeout(() => {
-        currentImg++;
-        updateImg();
-    }, 3000)
-};
+function updateImage() {
+  if (currentImage > imagesElement.length) {
+    currentImage = 1;
+  } else if (currentImage < 1) {
+    currentImage = imagesElement.length;
+  }
+  imageContainerEl.style.transform = `translateX(-${(currentImage - 1) * 500}px)`;
+  timeout = setTimeout(() => {
+    currentImage++;
+    updateImage();
+  }, 3000);
+}
